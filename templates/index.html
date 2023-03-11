@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Summarizer App</title>
+  <style>
+    /* Set up basic styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F5F5F5;
+    }
+    
+    #wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+    }
+
+    /* Style the header */
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #333;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style the form */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    label {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: none;
+      width: 100%;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    button[type="submit"]:hover {
+      background-color: #555;
+    }
+
+    /* Style the summary section */
+    h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: #333;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+      color: #666;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <h1>Summarizer App</h1>
+    <form action="{{ url_for('summarize') }}" method="post">
+    <label for="url">Enter YouTube video URL:</label>
+<input type="text" id="url" name="url" placeholder="https://www.youtube.com/watch?v=...">
+
+  <button type="submit">Summarize</button>
+    </form>
+    {% if summary %}
+	<h2>Summary:</h2>
+	<!-- Split the summary by new lines and create a <p> element for each line -->
+	{% for line in summary.split('\n') %}
+	<p>{{ line }}</p>
+	{% endfor %}
+	{% endif %}
+
+  </div>
+</body>
+</html>
