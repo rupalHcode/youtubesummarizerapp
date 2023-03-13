@@ -17,6 +17,5 @@
     "FLASK_APP": "app.py"
   },
   "public": "./templates",
-  "output": "./public",
   "entrypoint": "./app.py"
 }
