@@ -29,7 +29,7 @@ def summarize():
             end_index = (i + 1) * word_limit
             parts.append(' '.join(words[start_index:end_index]))
 
-    openai.api_key = 'config.openai_api_key'
+    openai.api_key = os.environ.get('OPENAI')
 
     if bigtext == True:
         summary_list = []
