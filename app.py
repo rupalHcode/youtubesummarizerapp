@@ -1,5 +1,5 @@
 import openai
-import config
+import os
 from flask import Flask, render_template, request
 from youtube_transcript_api import YouTubeTranscriptApi
 from urllib.parse import urlparse, parse_qs
@@ -29,7 +29,7 @@ def summarize():
             end_index = (i + 1) * word_limit
             parts.append(' '.join(words[start_index:end_index]))
 
-    openai.api_key = config.openai_api_key
+    openai.api_key = os.environ.get("API_KEY")
 
     if bigtext == True:
         summary_list = []
