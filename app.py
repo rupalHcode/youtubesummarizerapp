@@ -29,14 +29,13 @@ def summarize():
             end_index = (i + 1) * word_limit
             parts.append(' '.join(words[start_index:end_index]))
 
-    openai.api_key = os.environ.get('OPENAI')
+    openai.api_key = config.openai_api_key
 
     if bigtext == True:
         summary_list = []
         for i, part in enumerate(parts):
-            model_engine = "text-davinci-003"
-            prompt = (f"This text is a piece of a youtube video script. Please summarize this and make sure to not give any numbering to the keypoints and add a new line after every keyPoint :\n{part}\n"
-                      "Keypoints:\n")	
+            model_engine = "text-davinci-002"
+            prompt = f"This text is a piece of a youtube video script. Please summarize this in depth mentioning all the main points:\n{part}\n"
             response = openai.Completion.create(
                 engine=model_engine,
                 prompt=prompt,
@@ -47,9 +46,10 @@ def summarize():
                 timeout=20,
             )
             summary = response.choices[0].text.strip()
-            summary_list.append(summary)
+            summary_list.append(summary + "\n\n")  # Add two newline characters to create a blank line between key points
 
-        summary = '<br>'.join(summary_list) # Separate each summary with a new line
+        summary = "".join(summary_list)  # Separate each summary with a new line
+
 
     return render_template('index.html', summary=summary)
 
