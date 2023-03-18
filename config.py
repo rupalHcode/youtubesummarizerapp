@@ -1,1 +1,4 @@
-openai_api_key = "YOUR_API_KEY_HERE"
+import os
+
+API_KEY = os.environ.get("API_KEY")
+openai_api_key = API_KEY
